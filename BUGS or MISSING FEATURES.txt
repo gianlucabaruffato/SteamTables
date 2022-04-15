@@ -1,0 +1,8 @@
+- Implementar presiones relativas
+- Arreglar bug mayusculas
+- Presion en kg input no anda?
+- Cambio unidad temp en sobrecal
+
+Opcionales, o a futuro:
+
+- Resumen de ciclos
