@@ -21,8 +21,8 @@
     box-shadow: 0 0 12px rgb(31, 31, 31);
     height: 200px;
     background-image: url(fondo9.jpg);
-    background-position: 0 -200px;
-    background-size: cover;
+    /* background-position: 0 -200px; */
+    background-size: 100vw;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
