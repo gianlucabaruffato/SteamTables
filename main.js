@@ -1,4 +1,5 @@
-var URL = 'https://api.npoint.io/cc6298c9846bb3c638e3';
+// var URL = 'https://api.npoint.io/719d2c276f0f411e853b';
+var URL = 'https://api.jsonstorage.net/v1/json/e5512e35-5f39-4497-a9d4-46fdc4777b0d/a47a494f-79c8-41bf-ad29-e6d300624389'
 
 const variablesTemp = ['Psat', 'hf', 'hfg', 'hg', 'sf', 'sfg', 'sg', 'uf', 'ufg', 'ug', 'vf', 'vg'];
 const variablesPres = ['Tsat', 'hf', 'hfg', 'hg', 'sf', 'sfg', 'sg', 'uf', 'ufg', 'ug', 'vf', 'vg'];
@@ -50,6 +51,10 @@ function inputPres(){
       <li><a class="dropdown-item" onclick="changePresUnit('kg')">kg/cm²</a></li>
       <li><a class="dropdown-item" onclick="changePresUnit('bar')">bar</a></li>
       <li><a class="dropdown-item" onclick="changePresUnit('PSI')">PSI</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('kpa G')">kPa G</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('kg G')">kg/cm² G</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('bar G')">bar G</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('PSI G')">PSI G</a></li>
     </ul>
   </div>
   <input class="btn btn-success" type="submit" value="Submit" onclick="submitPres()">
@@ -130,6 +135,10 @@ function inputEntropyPres(){
       <li><a class="dropdown-item" onclick="changePresUnit('kg')">kg/cm²</a></li>
       <li><a class="dropdown-item" onclick="changePresUnit('bar')">bar</a></li>
       <li><a class="dropdown-item" onclick="changePresUnit('PSI')">PSI</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('kPa G')">kPa G</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('kg G')">kg/cm² G</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('bar G')">bar G</a></li>
+      <li><a class="dropdown-item" onclick="changePresUnit('PSI G')">PSI G</a></li>
     </ul>
   </div>
 
@@ -215,7 +224,7 @@ function submitTemp(){
 }
 
 function submitPres(){
-  let input = document.getElementById("inputPres").value;
+  let input = parseFloat(document.getElementById("inputPres").value);
   let presUnit = document.getElementById('dropdownPres').innerText
 
   // Checks if inputs are correct
@@ -225,10 +234,12 @@ function submitPres(){
     return
   }
 
+
+
   switch (presUnit) {
-    case 'kpa':
+    case 'kPa':
       break
-    case 'kg':
+    case 'kg/cm²':
       input = input*98.07
       break
     case 'bar':
@@ -237,11 +248,27 @@ function submitPres(){
     case 'PSI':
       input = input*6.895
       break
+    case 'kPa G':
+      input = input + 101.32
+      break
+    case 'kg/cm² G':
+      input = (input+101.32)*98.07
+      break
+    case 'bar G':
+      input = (input+101.32)*100
+      break
+    case 'PSI G':
+      input = (input+101.32)*6.895
+      break
   }
 
   if (input < 1 || input > 22064 ) {
     alert(`ERROR: Temperature or pressure values out of range!`)
     return
+  }
+
+  if (input == 1) {
+    input = 1.001
   }
 
   for (let i = 0; i < dataJson.Pres.length; i++){
@@ -351,7 +378,7 @@ function submitOverheated() { // 1 TEMp 2 PRES
   interpolatedArray = []
 
   outer_block1: for (let a = 0; a < dataJson.Sobrecal.length; a++) {
-   
+  
     for (let i = 1; i <= 3; i++) {
       
       joinedP = ['p', i].join('') 
@@ -634,6 +661,18 @@ function submitEntropyPres() {
     case 'PSI ':
       input1 = input1*6.895
       break
+    case 'kPa G ':
+      input1 = input1 + 101.32
+      break
+    case 'kg/cm² G ':
+      input1 = (input1+101.32)*98.07
+      break
+    case 'bar G ':
+      input1 = (input1+101.32)*100
+      break
+    case 'PSI G ':
+      input1 = (input1+101.32)*6.895
+      break
   }
 
   // Checks if inputs are correct
@@ -724,10 +763,14 @@ function replaceTempResults(){
                 kPa
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownPres">
-            <li><a class="dropdown-item" onclick="changePresUnit('kpa')">kPa</a></li>
-            <li><a class="dropdown-item" onclick="changePresUnit('kg')">kg/cm²</a></li>
-            <li><a class="dropdown-item" onclick="changePresUnit('bar')">bar</a></li>
-            <li><a class="dropdown-item" onclick="changePresUnit('PSI')">PSI</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('kpa')">kPa</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('kg')">kg/cm²</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('bar')">bar</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('PSI')">PSI</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('kpa G')">kPa G</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('kg G')">kg/cm² G</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('bar G')">bar G</a></li>
+              <li><a class="dropdown-item" onclick="changePresUnit('PSI G')">PSI G</a></li>
             </ul>
         </div>
     </span>
@@ -736,7 +779,7 @@ function replaceTempResults(){
         <span style="margin: 0px 10px;">Energy Units</span>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEnergy" data-bs-toggle="dropdown" aria-expanded="false">
-            kJ/Kg
+            kJ/kg
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownEnergy">
                 <li><a class="dropdown-item" onclick="changeEnergyUnit('kJ/kg')">kJ/kg</a></li>
@@ -891,6 +934,26 @@ function changePresUnit(unit) {
       document.getElementById('dropdownPres').innerHTML = 'PSI'
       document.getElementById('presUnit').innerHTML = 'PSI'
       document.getElementById('presValue').innerHTML = (interpolatedArray[0]/6.895).toFixed(3)
+      break
+    case 'kpa G':
+      document.getElementById('dropdownPres').innerHTML = 'kPa G'
+      document.getElementById('presUnit').innerHTML = 'kPa G'
+      document.getElementById('presValue').innerHTML = (interpolatedArray[0]-101.325).toFixed(3)
+      break
+    case 'kg G':
+      document.getElementById('dropdownPres').innerHTML = 'kg/cm² G'
+      document.getElementById('presUnit').innerHTML = 'kg/cm² G'
+      document.getElementById('presValue').innerHTML = ((interpolatedArray[0]-101.325)/98.066).toFixed(3)
+      break
+    case 'bar G':
+      document.getElementById('dropdownPres').innerHTML = 'bar G'
+      document.getElementById('presUnit').innerHTML = 'bar G'
+      document.getElementById('presValue').innerHTML = ((interpolatedArray[0]-101.325)/100).toFixed(3)
+      break
+    case 'PSI G':
+      document.getElementById('dropdownPres').innerHTML = 'PSI G'
+      document.getElementById('presUnit').innerHTML = 'PSI G'
+      document.getElementById('presValue').innerHTML = ((interpolatedArray[0]-101.325)/6.895).toFixed(3)
       break
   }
 }
@@ -1094,7 +1157,7 @@ function replacePresResults() {
       <span style="margin: 0px 10px;">Energy Units</span>
       <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEnergy" data-bs-toggle="dropdown" aria-expanded="false">
-          kJ/Kg
+          kJ/kg
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownEnergy">
               <li><a class="dropdown-item" onclick="changeEnergyUnit('kJ/kg')">kJ/kg</a></li>
@@ -1203,7 +1266,7 @@ function replaceOverheatedResults() {
       <span style="margin: 0px 10px;">Energy Units</span>
       <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEnergy" data-bs-toggle="dropdown" aria-expanded="false">
-          kJ/Kg
+          kJ/kg
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownEnergy">
               <li><a class="dropdown-item" onclick="changeEnergyUnit('kJ/kg')">kJ/kg</a></li>
@@ -1280,7 +1343,7 @@ function replaceWetSteamPresResults() {
         <span style="margin: 0px 10px;">Energy Units</span>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEnergy" data-bs-toggle="dropdown" aria-expanded="false">
-            kJ/Kg
+            kJ/kg
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownEnergy">
                 <li><a class="dropdown-item" onclick="changeEnergyUnit('kJ/kg')">kJ/kg</a></li>
@@ -1338,6 +1401,10 @@ function replaceWetSteamTempResults() {
             <li><a class="dropdown-item" onclick="changePresUnit('kg')">kg/cm²</a></li>
             <li><a class="dropdown-item" onclick="changePresUnit('bar')">bar</a></li>
             <li><a class="dropdown-item" onclick="changePresUnit('PSI')">PSI</a></li>
+            <li><a class="dropdown-item" onclick="changePresUnit('kpa G')">kPa G</a></li>
+            <li><a class="dropdown-item" onclick="changePresUnit('kg G')">kg/cm² G</a></li>
+            <li><a class="dropdown-item" onclick="changePresUnit('bar G')">bar G</a></li>
+            <li><a class="dropdown-item" onclick="changePresUnit('PSI G')">PSI G</a></li>
             </ul>
         </div>
     </span>
@@ -1346,7 +1413,7 @@ function replaceWetSteamTempResults() {
         <span style="margin: 0px 10px;">Energy Units</span>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEnergy" data-bs-toggle="dropdown" aria-expanded="false">
-            kJ/Kg
+            kJ/kg
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownEnergy">
                 <li><a class="dropdown-item" onclick="changeEnergyUnit('kJ/kg')">kJ/kg</a></li>
