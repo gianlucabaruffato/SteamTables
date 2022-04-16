@@ -22,9 +22,16 @@
     height: 200px;
     background-image: url(fondo9.jpg);
     /* background-position: 0 -200px; */
-    background-size: 100vw;
+    background-size: 150vw;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+@media only screen 
+and (max-width : 500px) {
+    .navbar {
+        height: 150px;
+    }
 }
 
 .span-brand {
