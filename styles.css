@@ -20,7 +20,7 @@
     background-color: #0e77a8;
     box-shadow: 0 0 12px rgb(31, 31, 31);
     height: 200px;
-    background-image: url(fondo9.jpg);
+    background-image: url(images/navbar_background.jpg);
     /* background-position: 0 -200px; */
     background-size: 150vw;
     background-repeat: no-repeat;
@@ -60,7 +60,7 @@ and (max-width : 500px) {
     margin-top: 10px;
     /* box-shadow: 0px 2px 8px rgb(99, 99, 99); */
 }
- 
+
 .input-group {
     max-width: 350px;
 }
@@ -105,3 +105,23 @@ and (max-width : 500px) {
     border-color: #356d86;
 }
 
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(27, 27, 27);
+    color: rgb(116, 116, 116);
+    padding: 10px;
+    margin-top: 70px;
+}
+
+.social-links {
+    text-decoration: none;
+    margin: 3px;
+}
+
+.social {
+    padding-top: 10px;
+    text-align: end;
+    align-items: flex-end;
+}
