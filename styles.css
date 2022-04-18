@@ -1,7 +1,7 @@
 .body {
     background-color: #c7c7c7;
     /* background-color: #0f6699; */
-    height: 700px;
+    height: 100vh;
     font-family: 'ProductSansRegular';
 }
 
@@ -113,6 +113,7 @@ and (max-width : 500px) {
     color: rgb(116, 116, 116);
     padding: 10px;
     margin-top: 70px;
+    margin-bottom: 0;
 }
 
 .social-links {
@@ -124,4 +125,8 @@ and (max-width : 500px) {
     padding-top: 10px;
     text-align: end;
     align-items: flex-end;
+}
+
+.container {
+    height: 100%;
 }
