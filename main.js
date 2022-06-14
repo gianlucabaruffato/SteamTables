@@ -252,13 +252,13 @@ function submitPres(){
       input = input + 101.32
       break
     case 'kg/cm² G':
-      input = (input+101.32)*98.07
+      input = (input+1.033)*98.07
       break
     case 'bar G':
-      input = (input+101.32)*100
+      input = (input+1.013)*100
       break
     case 'PSI G':
-      input = (input+101.32)*6.895
+      input = (input+14.69)*6.895
       break
   }
 
@@ -339,15 +339,15 @@ function submitOverheated() { // 1 TEMp 2 PRES
       input2 = input2 + 0.1013
       break
     case 'bar G ':
-      input2 = input2 + 0.1013
+      input2 = input2 + 1.013
       input2 = input2/10
       break
     case 'kg/cm² G ':
-      input2 = input2 + 0.1013
+      input2 = input2 + 1.033
       input2 = input2/10.197
       break
     case 'PSI G ':
-      input2 = input2 + 0.1013
+      input2 = input2 + 14.69
       input2 = input2/145
       break
   }
@@ -665,13 +665,13 @@ function submitEntropyPres() {
       input1 = input1 + 101.32
       break
     case 'kg/cm² G ':
-      input1 = (input1+101.32)*98.07
+      input1 = (input1+1.033)*98.07
       break
     case 'bar G ':
-      input1 = (input1+101.32)*100
+      input1 = (input1+1.013)*100
       break
     case 'PSI G ':
-      input1 = (input1+101.32)*6.895
+      input1 = (input1+14.69)*6.895
       break
   }
 
