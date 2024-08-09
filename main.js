@@ -1106,7 +1106,7 @@ function changeSvolUnit(unit) {
         break
       case 'ft3':
         document.getElementById('dropdownSvol').innerHTML = 'ft³/lb '
-        document.getElementById('svolValue1').innerHTML = (interpolatedArray[1]/16.02).toFixed(6)
+        document.getElementById('svolValue1').innerHTML = (interpolatedArray[1]*16.018).toFixed(6)
         document.getElementById('svolUnit1').innerHTML = 'ft³/lb'
         break
     }   
@@ -1121,8 +1121,8 @@ function changeSvolUnit(unit) {
         break
       case 'ft3':
         document.getElementById('dropdownSvol').innerHTML = 'ft³/lb '
-        document.getElementById('svolValue1').innerHTML = (interpolatedArray[10]/16.02).toFixed(6)
-        document.getElementById('svolValue2').innerHTML = (interpolatedArray[11]/16.02).toFixed(6)
+        document.getElementById('svolValue1').innerHTML = (interpolatedArray[10]*16.018).toFixed(6)
+        document.getElementById('svolValue2').innerHTML = (interpolatedArray[11]*16.018).toFixed(6)
         document.getElementById('svolUnit1').innerHTML = 'ft³/lb'
         document.getElementById('svolUnit2').innerHTML = 'ft³/lb'
         break
